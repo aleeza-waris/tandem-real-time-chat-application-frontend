@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { api } from "@/lib/api";
+import { setSessionToken } from "@/lib/session";
 import type { AuthValues } from "@/schemas/auth";
 import { signInSchema, signUpSchema } from "@/schemas/auth";
 import type { ChatUser } from "@/types/chat";
@@ -19,7 +20,7 @@ export function AuthForm({ onAuthenticated }: { onAuthenticated: (user: ChatUser
   const isSignUp = tab === "signup";
   const authMutation = useMutation({
     mutationFn: ({ endpoint, body }: { endpoint: string; body: unknown }) =>
-      api<{ user: ChatUser }>(endpoint, { method: "POST", body })
+      api<{ user: ChatUser; token: string }>(endpoint, { method: "POST", body })
   });
   const schema = isSignUp ? signUpSchema : signInSchema;
   const form = useForm<AuthValues>({
@@ -35,6 +36,7 @@ export function AuthForm({ onAuthenticated }: { onAuthenticated: (user: ChatUser
         ? values
         : { email: values.email, password: values.password };
       const result = await authMutation.mutateAsync({ endpoint, body });
+      setSessionToken(result.token);
       onAuthenticated(result.user);
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Unable to sign in");
@@ -45,6 +47,7 @@ export function AuthForm({ onAuthenticated }: { onAuthenticated: (user: ChatUser
     setError("");
     try {
       const result = await authMutation.mutateAsync({ endpoint: "/auth/google", body: { credential } });
+      setSessionToken(result.token);
       onAuthenticated(result.user);
     } catch (googleError) {
       setError(googleError instanceof Error ? googleError.message : "Google sign-in failed");
