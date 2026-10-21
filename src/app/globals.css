@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-canvas: var(--canvas);
+  --color-brand: var(--primary);
+  --color-brand-dark: var(--primary-dark);
+  --color-brand-soft: var(--lavender);
+  --color-brand-accent: var(--primary);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-muted-ui: var(--muted-ui);
+  --color-surface: var(--surface);
+  --color-auth-primary: var(--auth-primary);
+  --color-auth-ink: var(--auth-ink);
+  --color-auth-muted: var(--auth-muted);
+}
+
+:root {
+  color-scheme: light;
+  --ink: #25243a;
+  --line: #e2e1f0;
+  --line-soft: #ecebf7;
+  --canvas: #f7f7fc;
+  --surface: #ffffff;
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --lavender: #e9e7ff;
+  --auth-primary: var(--primary);
+  --auth-lavender: var(--lavender);
+  --auth-background: var(--canvas);
+  --auth-ink: var(--ink);
+  --auth-muted: #5d6278;
+  --auth-border: #e0def2;
+  --auth-error: #d9485f;
+  --muted-ui: #62677d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+/* Ant Design renders its own nested elements, so these need selector overrides. */
+.auth-page {
+  background: var(--auth-background);
+  color: var(--auth-ink);
+}
+
+.auth-welcome {
+  background: radial-gradient(ellipse at 83% 40%, rgb(255 255 255 / 72%), transparent 35%),
+    linear-gradient(135deg, var(--auth-background), var(--auth-lavender));
+}
+
+.auth-page .text-auth-ink {
+  color: var(--auth-ink);
+}
+
+.auth-page .text-auth-muted {
+  color: var(--auth-muted);
+}
+
+.auth-tabs .ant-tabs-nav {
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.auth-tabs .ant-tabs-nav-list {
+  display: flex;
+  width: 100%;
+}
+
+.auth-tabs .ant-tabs-tab {
+  flex: 1;
+  justify-content: center;
+  padding: 0 0 11px !important;
+  color: #62677d;
+  font-size: 13px;
+}
+
+.auth-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--auth-primary) !important;
+  font-weight: 600;
+}
+
+.auth-tabs .ant-tabs-ink-bar {
+  height: 2px;
+  border-radius: 5px;
+  background: var(--auth-primary);
+}
+
+.auth-field .ant-input,
+.auth-field .ant-input-affix-wrapper {
+  min-height: 45px;
+  border-color: var(--auth-border);
+  border-radius: 9px;
+  background: var(--surface);
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.auth-field .ant-input-affix-wrapper .ant-input {
+  min-height: unset;
+  background: transparent;
+}
+
+.auth-field .ant-input:hover,
+.auth-field .ant-input-affix-wrapper:hover {
+  border-color: #9b96ee;
+}
+
+.auth-field .ant-input:focus,
+.auth-field .ant-input-affix-wrapper-focused {
+  border-color: var(--auth-primary);
+  box-shadow: 0 0 0 3px rgb(79 70 229 / 12%);
+}
+
+.auth-field input::placeholder {
+  color: #62677d;
+  opacity: 1;
+}
+
+.auth-error {
+  color: var(--auth-error);
+}
+
+.auth-submit.ant-btn {
+  height: 46px;
+  margin-top: 2px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--auth-primary);
+  box-shadow: 0 6px 14px rgb(79 70 229 / 18%);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.auth-submit.ant-btn:hover {
+  background: var(--primary-dark) !important;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+  content: "";
+}
+
+.auth-divider {
+  color: var(--auth-muted);
+}
+
+.conversation-search .ant-input-affix-wrapper {
+  height: 40px;
+  border-color: var(--line-soft);
+  border-radius: 10px;
+  background: var(--canvas);
+  box-shadow: none;
+}
+
+.conversation-search .ant-input {
+  background: transparent;
+  font-size: 12px;
+}
+
+.conversation-search .ant-input-prefix {
+  margin-right: 9px;
+  color: var(--muted-ui);
+}
+
+.conversation-search .ant-input-affix-wrapper-focused {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(79 70 229 / 12%);
+}
+
+.conversation-row:focus-visible,
+.retry-action:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.conversation-row .ant-avatar,
+.chat-peer-avatar {
+  flex: 0 0 auto;
+  background: var(--lavender);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.chat-compose .ant-input {
+  resize: none;
+  padding: 9px 0;
+  border: 0;
+  box-shadow: none !important;
+  font-size: 12px;
+}
+
+.chat-compose .ant-input::placeholder {
+  color: #62677d;
+}
+
+.chat-compose:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(79 70 229 / 12%);
+}
+
+.ant-message-notice-content {
+  border: 1px solid var(--line-soft);
+  border-radius: 11px;
+  box-shadow: 0 12px 30px rgb(37 36 58 / 10%);
+}
+
+@keyframes tandem-dot-bounce {
+  0%,
+  38%,
+  100% {
+    transform: translateY(0);
+  }
+
+  18% {
+    transform: translateY(-10px);
+  }
+}
+
+.typing-indicator__dot {
+  animation: tandem-dot-bounce 900ms ease-in-out infinite;
+}
+
+.typing-indicator__dot:nth-child(2) {
+  animation-delay: 300ms;
+}
+
+.typing-indicator__dot:nth-child(3) {
+  animation-delay: 600ms;
+}
+
+button:focus-visible,
+a:focus-visible,
+.ant-tabs-tab-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+}
